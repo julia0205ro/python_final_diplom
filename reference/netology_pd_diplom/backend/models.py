@@ -240,9 +240,9 @@ class Order(models.Model):
     def __str__(self):
         return str(self.dt)
 
-    # @property
-    # def sum(self):
-    #     return self.ordered_items.aggregate(total=Sum("quantity"))["total"]
+    @property
+    def sum(self):
+        return sum(product.quantity * product.product_info.price for product in self.ordered_items.all())
 
 
 class OrderItem(models.Model):
